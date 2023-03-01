@@ -22,10 +22,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="#">Главная <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Добавить нарушение</a>
+            <a class="nav-item nav-link" th:href="@{/all}">Инциденты</a>
             <a class="nav-item nav-link" th:text="${user}"></a>
         </div>
     </div>
+    <a class="btn btn-primary" th:href="@{/create}" role="button">Добавить инцидент</a>
 </nav>
 </body>
 </html>
