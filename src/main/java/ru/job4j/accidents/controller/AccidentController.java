@@ -40,7 +40,7 @@ public class AccidentController {
     @GetMapping("/edit/{accidentId}")
     public String getFormEdit(Model model, @PathVariable("accidentId") int id) {
         Optional<Accident> optionalAccident = accidentService.findById(id);
-        if(optionalAccident.isEmpty()) {
+        if (optionalAccident.isEmpty()) {
             return "shared/error404";
         }
         Accident accident = optionalAccident.get();
