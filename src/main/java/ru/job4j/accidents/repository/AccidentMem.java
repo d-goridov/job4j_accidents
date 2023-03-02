@@ -7,23 +7,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class AccidentMem implements AccidentRepository {
 
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
+    private final AtomicInteger id = new AtomicInteger(1);
 
     public AccidentMem() {
-        addAccident(new Accident(1, "Превышение скорости", "Превышение скорости свыше чем на 20км/ч",
+        accidents.put(1, new Accident(id.getAndIncrement(), "Превышение скорости", "Превышение скорости свыше чем на 20км/ч",
                 "ул. Зорге 22"));
-        addAccident(new Accident(2, "ДТП", "ДТП с участием двух и более ТС",
+        accidents.put(2, new Accident(id.getAndIncrement(), "ДТП", "ДТП с участием двух и более ТС",
                 "ул. Шеболдаева 1"));
-        addAccident(new Accident(3, "Разворот в неположенном месте",
+        accidents.put(3,new Accident(id.getAndIncrement(), "Разворот в неположенном месте",
                 "Разворот с пересечением двойной сплошной разметки", "ул. Вятская 89"));
     }
 
     @Override
     public void addAccident(Accident accident) {
+        accident.setId(id.getAndIncrement());
         accidents.putIfAbsent(accident.getId(), accident);
     }
 
