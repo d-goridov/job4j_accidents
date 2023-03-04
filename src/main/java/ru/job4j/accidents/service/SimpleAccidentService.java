@@ -35,7 +35,7 @@ public class SimpleAccidentService implements AccidentService {
     public List<Accident> getAllAccidents() {
         List<Accident> accidents = accidentRepository.getAllAccidents();
 
-        for(Accident accident: accidents) {
+        for (Accident accident: accidents) {
             Optional<AccidentType> accidentTypeOptional = accidentTypeService.findById(accident.getType().getId());
             if (accidentTypeOptional.isEmpty()) {
                 throw new NoSuchElementException("Тип инцидента не найден");

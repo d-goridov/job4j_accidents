@@ -23,7 +23,7 @@ public class AccidentMem implements AccidentRepository {
                 "ул. Зорге 22", new AccidentType(1, "Две машины")));
         accidents.put(2, new Accident(id.getAndIncrement(), "ДТП", "ДТП с участием двух и более ТС",
                 "ул. Шеболдаева 1", new AccidentType(2, "Машина и человек")));
-        accidents.put(3,new Accident(id.getAndIncrement(), "Разворот в неположенном месте",
+        accidents.put(3, new Accident(id.getAndIncrement(), "Разворот в неположенном месте",
                 "Разворот с пересечением двойной сплошной разметки", "ул. Вятская 89",
                 new AccidentType(3, "Машина и велосипед")));
     }
