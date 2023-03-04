@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.accidents.model.Accident;
+
 import ru.job4j.accidents.service.AccidentService;
+import ru.job4j.accidents.service.AccidentTypeService;
 
 import java.util.Optional;
 
@@ -15,9 +17,11 @@ import java.util.Optional;
 public class AccidentController {
 
     private final AccidentService accidentService;
+    private final AccidentTypeService accidentTypeService;
 
-    public AccidentController(AccidentService accidentService) {
+    public AccidentController(AccidentService accidentService, AccidentTypeService accidentTypeService) {
         this.accidentService = accidentService;
+        this.accidentTypeService = accidentTypeService;
     }
 
     @GetMapping("/all")
@@ -27,7 +31,8 @@ public class AccidentController {
     }
 
     @GetMapping("/create")
-    public String viewCreateAccident() {
+    public String viewCreateAccident(Model model) {
+        model.addAttribute("types", accidentTypeService.getAllTypes());
         return "accidents/create";
     }
 
@@ -45,6 +50,7 @@ public class AccidentController {
         }
         Accident accident = optionalAccident.get();
         model.addAttribute("accident", accident);
+        model.addAttribute("types", accidentTypeService.getAllTypes());
         return "accidents/edit";
     }
 
