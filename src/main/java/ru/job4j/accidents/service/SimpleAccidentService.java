@@ -33,16 +33,7 @@ public class SimpleAccidentService implements AccidentService {
 
     @Override
     public List<Accident> getAllAccidents() {
-        List<Accident> accidents = accidentRepository.getAllAccidents();
-
-        for (Accident accident: accidents) {
-            Optional<AccidentType> accidentTypeOptional = accidentTypeService.findById(accident.getType().getId());
-            if (accidentTypeOptional.isEmpty()) {
-                throw new NoSuchElementException("Тип инцидента не найден");
-            }
-            accident.setType(accidentTypeOptional.get());
-        }
-        return accidents;
+        return accidentRepository.getAllAccidents();
     }
 
     @Override
@@ -56,6 +47,7 @@ public class SimpleAccidentService implements AccidentService {
         if (accidentTypeOptional.isEmpty()) {
             throw new NoSuchElementException("Тип инцидента не найден");
         }
+        accident.setType(accidentTypeOptional.get());
         return accidentRepository.update(accident);
     }
 }

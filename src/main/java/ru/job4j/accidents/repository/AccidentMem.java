@@ -46,6 +46,6 @@ public class AccidentMem implements AccidentRepository {
 
     @Override
     public boolean update(Accident accident) {
-        return accidents.computeIfPresent(accident.getId(), (key, value) -> value = accident) != null;
+        return accidents.replace(accident.getId(), accident) != null;
     }
 }
